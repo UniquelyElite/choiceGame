@@ -27,6 +27,10 @@ function choiceDisplayer(a, b, c){
     input.choice3.innerText = c;
 }
 
+function death() {
+    displayer('SYSTEM FAILURE\n\nSHUTTING DOWN...', 100, loading1);
+}
+
 function loading1() {
     displayer('Rebooting...', 250, loading2);
 }
@@ -77,6 +81,9 @@ function scene2() {
     if (x == 'choice2'){
         choiceDisplayer('Cover ears', 'Yell at it', '')
         displayer('It loudly clatters to the floor, the sound echoing around...\n\nAn eerie alarm begins to sound...', 50, makeVisible);
+        for (const choice of input){
+            choice.onclick = function(){scene3()};
+        }
     }
     if (x == 'choice3'){
     }
@@ -87,13 +94,14 @@ function scene3() {
     let x = window.event.target.id;
 
     if (x == 'choice1'){
-        displayer('You cover your ears and the alarm fades, you decide to uncover your ears...\n\nYou stay still for a few seconds, noticing a faint whirring sound. Something ice cold lands in your hand...', 50, makeVisible)
+        displayer('The alarm fades, you decide to uncover your ears...\n\nYou stay still for a few seconds, noticing a faint whirring sound. Something ice cold lands in your hand...', 50, makeVisible)
         choiceDisplayer('Examine it', 'Drop it', 'Throw it');
         for (const choice of input){
             choice.onclick = function(){scene2()};
         }
     }
     if (x == 'choice2'){
+        displayer('Your vision is filled with glitching stuff... pixels? Wha- th- fu- dg-\n\n\n\n', 50, death)
     }
     if (x == 'choice3'){
     }
