@@ -1,0 +1,36 @@
+
+    body {
+        margin: 0;
+    }
+
+    p {
+        color: green;
+        margin: 0;
+        display: inline-block;
+        white-space: pre-wrap;
+    }
+
+    #screen {
+        background-color: black;
+        width: 100vw;
+        height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #playersInputSpot {
+        background-color: black;
+        width: 100vw;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .choices {
+        font-size: 5vh;
+        height: 75%;
+        width: 30%;
+        background-color: purple;
+    }
