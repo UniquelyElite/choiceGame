@@ -28,7 +28,37 @@ function choiceDisplayer(a, b, c){
 }
 
 function death() {
-    displayer('SYSTEM FAILURE\n\nSHUTTING DOWN...', 100, loading1);
+    var can = document.getElementById('deathSceneCanvas');
+    can.style.zIndex = 2;
+    var ctx = can.getContext('2d'); 
+    var img = new Image(); 
+    img.src = "back.png"; 
+    var img2 = new Image();
+    img2.src = 'imademyownerror.jpg';
+    //Background of death
+    function deathGif() { 
+        ctx.drawImage(img, 0, 0);
+        //Draw images along width
+        for (let i = 0; (can.width / 300) > i; i++){
+            ctx.drawImage(img, 300 * i, Math.floor(Math.random() * can.width), can.width/5, can.height/5)
+        }
+        //Draw images along height
+        for (let i = 0; (can.height / 300) > i; i++){
+            ctx.drawImage(img, Math.floor(Math.random() * can.height), 300 * i, can.width/5, can.height/5)
+        }
+    } 
+    //initiate it
+    for (let i = 70; i > 0; i--){
+        setTimeout(function(){ctx.drawImage(img2, Math.floor(Math.random() * can.height), Math.floor(Math.random() * can.width), can.width/3, can.height/3)}, i * 100);
+    }
+    setTimeout(function(){
+        let gif = setInterval(deathGif, 50);
+        setTimeout(function(){
+            clearInterval(gif);
+            ctx.clearRect(0, 0, can.width, can.height);
+            setTimeout(function() {can.style.zIndex = -1; loading1()}, 2000);
+        }, 1000);
+    }, 7000);
 }
 
 function loading1() {
@@ -76,7 +106,18 @@ function scene1() {
 function scene2() {
     let x = window.event.target.id;
 
-    if (x == 'choice1'){
+    if (x == 'choice1' && input.choice1.innerText != 'Examine it'){
+        choiceDisplayer('Cover ears', 'Yell at it', 'Follow sound')
+        displayer('Their is a loud beep as your finger presses it. An eerie alarm sounds, nearly drowning out the sound of screeching metal...', 50, makeVisible);
+        for (const choice of input){
+            choice.onclick = function(){scene3()};
+        }
+    } else if (x == 'choice1'){
+        choiceDisplayer('Push it', 'Drop it', 'Throw it')
+        displayer('You turn it over in your hands, searching it with your fingers...\n\nYou find some sort of... button?', 50, makeVisible);
+        for (const choice of input){
+            choice.onclick = function(){scene2()};
+        }
     }
     if (x == 'choice2'){
         choiceDisplayer('Cover ears', 'Yell at it', '')
@@ -106,9 +147,11 @@ function scene3() {
         }
     }
     if (x == 'choice2'){
-        displayer('Your vision is filled with glitching stuff... pixels? Wha- th- fu- dg-\n\n\n\n', 50, death)
+        displayer('You begin to yell at the alarm, but soon find youself unable to yell...\n\n\n\n', 50, death)
     }
     if (x == 'choice3' && input.choice3.innerText != ''){
-        displayer('After taking a few steps you find youself unable to move forward, your vision filled with gliching stuff... pixels? Wha- th- fu- dg-\n\n\n\n', 50, death);
+        displayer('After taking a few steps you find youself unable to move forward...\n\n\n\n', 50, death);
     }
 }
+
+function scene4() {}
