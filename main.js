@@ -86,6 +86,11 @@ function scene2() {
         }
     }
     if (x == 'choice3'){
+        choiceDisplayer('Cover ears', 'Yell at it', 'Follow sound')
+        displayer('Their is a loud beep as it hits a wall. An eerie alarm sounds, nearly drowning out the sound of screeching metal...', 50, makeVisible);
+        for (const choice of input){
+            choice.onclick = function(){scene3()};
+        }
     }
 
 }
@@ -103,6 +108,7 @@ function scene3() {
     if (x == 'choice2'){
         displayer('Your vision is filled with glitching stuff... pixels? Wha- th- fu- dg-\n\n\n\n', 50, death)
     }
-    if (x == 'choice3'){
+    if (x == 'choice3' && input.choice3.innerText != ''){
+        displayer('After taking a few steps you find youself unable to move forward, your vision filled with gliching stuff... pixels? Wha- th- fu- dg-\n\n\n\n', 50, death);
     }
 }
